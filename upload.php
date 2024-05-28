@@ -1,0 +1,22 @@
+<?php
+    //計算總共上傳幾個檔案
+    $i=count($_FILES["uploadFile"]["name"]);
+    echo "總共上傳{$i}個檔案<br>";
+    //利用for迴圈將所有檔案置入資料夾
+    for($j=0;$j<$i;$j++)
+    {
+        //利用if判斷式判斷是否上傳成功
+        if($_FILES["uploadFile"]["error"][$j]==0)
+        {
+            //如果檔案成功置入資料夾(此程式碼設定為根目錄)
+            if(move_uploaded_file($_FILES["uploadFile"]["tmp_name"][$j],"./audio/".$_FILES["uploadFile"]["name"][$j]))
+            {
+                echo"上傳成功<br>";
+            }
+            else
+            { 
+                echo"上傳失敗";
+            }
+        }
+    }
+?>
